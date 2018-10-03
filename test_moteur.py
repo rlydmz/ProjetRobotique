@@ -5,23 +5,24 @@
 
 
 import pypot.dynamixel as pd
-import keyboard as kb
+#import keyboard as kb
 import time
+from sys import exit
 
 
 def stop():
     dxl_io.set_moving_speed({1:0})
     dxl_io.set_moving_speed({2:0})
 
-def avance(puissance=10):
+def forward(puissance=10):
     dxl_io.set_moving_speed({1:-puissance})
     dxl_io.set_moving_speed({2:puissance})
 
-def recule(puissance=10):
+def backward(puissance=10):
     dxl_io.set_moving_speed({1:puissance})
     dxl_io.set_moving_speed({2:-puissance})
 
-def tourne(angle, puissance=10):
+def turn(angle, puissance=10):
     signe = signeDe(angle)
     if angle == 0:
         avance(puissance)
@@ -38,7 +39,7 @@ def signeDe(nombre):
 
 ports = pd.get_available_ports()
 if not ports:
-    exit('No port')
+    exit ('No port')
 print ("Found ports", ports)
 
 print('Connecting on the first available port:', ports[0])
@@ -74,4 +75,3 @@ while True:
 
 
 #dxl_io.scan(range(10))
-
