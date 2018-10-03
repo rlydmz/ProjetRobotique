@@ -20,12 +20,12 @@ def stop():
     dxl_io.set_moving_speed({2:0})
 
 def forward(puissance=10):
-    dxl_io.set_moving_speed({1:-puissance})
-    dxl_io.set_moving_speed({2:puissance})
-
-def backward(puissance=10):
     dxl_io.set_moving_speed({1:puissance})
     dxl_io.set_moving_speed({2:-puissance})
+
+def backward(puissance=10):
+    dxl_io.set_moving_speed({1:-puissance})
+    dxl_io.set_moving_speed({2:puissance})
 
 def turn(angle, puissance=10):
     signe = signeDe(angle)
