@@ -65,6 +65,8 @@ dxl_io.set_wheel_mode([2])
 while True:
     forward(NTS)
     time.sleep(1)
+    backward(NTS)
+    time.sleep(1)
     stop()
     time.sleep(2)
 
