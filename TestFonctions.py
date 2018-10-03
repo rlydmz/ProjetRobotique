@@ -2,16 +2,62 @@ import numpy as np
 import cv2 as cv
 import math
 
+def detectionCourbe(img,width):
+    couloir=100
+    zone=100
+    ligneD=0
+    ligneG=0
+    for i in range(zone,0,-1):
+        ligneD+=img[len(img)-zone,width//2+couloir]
+        ligneG+=img[len(img)-zone,width//2-couloir]
+    if (ligneD>5*255):
+        print("Tourner a droite")
+    elif (ligneG>5*255):
+        print("Tourner a gauche")
+    else:
+        print ("Aller tout droit")
+        
+    
 
-###FONCTIONS COULEURS
+###FONCTIONS AUXILIAIRES
+
+def det(A,B,C):
+    x1=B[0]-A[0]
+    y1=B[1]-A[1]
+    x2=C[0]-A[0]
+    y2=C[1]-A[1]
+    d=x1*y2-y1*x2
+    return d
+
+def detectionParcours(frame,width):
+    #positionRegard = len(frame)//3
+    pointA = [0,0]
+    pointB = [len(frame)//2,0]
+    pointC = [len(frame)-1,0]
+    while ((pointA[1]<width-1) & (frame[pointA[0],pointA[1]] == 0 )):
+        pointA[1]+=1
+    while ((pointB[1]<width-1) & (frame[pointB[0],pointB[1]] == 0 )):
+           pointB[1]+=1
+    while ((pointC[1]<width-1) & (frame[pointC[0],pointC[1]] == 0 )):
+           pointC[1]+=1
+    delta = det(pointA,pointB,pointC)
+    print (delta)
+    if frame[0,width//2]!=0:
+        print('Aller tout droit')
+    else:
+        print('Attention,virage !')
+
 
 cap = cv.VideoCapture(1)
+
+###FONCTIONS COULEURS
 
 ##Suivi de ligne noire
 def noir():
     while(True):
         # Capture des frames
         ret, frame = cap.read(cv.IMREAD_UNCHANGED)
+        
         # Affichages des frames
         cv.imshow('frame',frame)
 
@@ -26,12 +72,27 @@ def noir():
         #seuillage
         #ret2, frame_gray=cap.read(cv.IMREAD_GRAYSCALE)
         gray = cv.cvtColor(frame_blur, cv.COLOR_BGR2GRAY)
-        _, img_seuil = cv.threshold(gray, 100, 255, cv.THRESH_BINARY);
+        _, img_seuil = cv.threshold(gray, 100, 2555, cv.THRESH_BINARY_INV);
 
-        imgContour, contours, hierarchy = cv.findContours(img_seuil, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-        cv.drawContours(imgContour, contours, -1, (255,255,0), 3)
+
+        #imgContour, contours, hierarchy = cv.findContours(img_seuil, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+        #cv.drawContours(imgContour, contours, -1, (255,255,0), 3)
+
+        #Ouverture = erosion + dilatation
+        kernel = np.ones((5,5),np.uint8)
+        erosion = cv.erode(img_seuil,kernel,iterations = 1)
+        dilatation = cv.dilate(img_seuil,kernel,iterations = 1)
 
         cv.imshow('frame_gray',img_seuil)
+        #cv.imshow('erosion',erosion)
+
+        #detection de contours verticaux
+        sobelx = cv.Sobel(dilatation, cv.CV_64F,1,0,ksize=5)
+        #laplacian = cv.Laplacian(dilatation, cv.CV_64F)
+
+        cv.imshow('contour',sobelx)
+        detectionCourbe(dilatation,width)
+
 
         """
         nbDivisions = 3
