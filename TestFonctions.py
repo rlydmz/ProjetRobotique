@@ -2,7 +2,7 @@ import numpy as np
 import cv2 as cv
 import math
 
-def detectionCourbe(img,width):
+"""def detectionCourbe(img,width):
     couloir=100
     zone=100
     ligneD=0
@@ -17,8 +17,9 @@ def detectionCourbe(img,width):
     else:
         print ("Aller tout droit")
         
+"""
     
-
+"""
 ###FONCTIONS AUXILIAIRES
 
 def det(A,B,C):
@@ -46,6 +47,44 @@ def detectionParcours(frame,width):
         print('Aller tout droit')
     else:
         print('Attention,virage !')
+"""
+
+def virage(img,width):
+    largeur=img.shape[0]
+    longueur=img.shape[1]
+    i=0
+    
+    #point 1 on le regarde au milieu de l'image: on fixele point à largeur//2
+    xFixe=largeur//2
+    
+    bordureG=[xFixe,0]
+    bordureD=[xFixe,0]
+
+    bordureGTrouvee=0
+    bordureDTrouvee=0
+
+    
+    for y in range(0,longueur-1):
+        if img[xFixe,y]==255:
+            bordureG=[xFixe,y]
+            break
+
+    for z in range(longueur-1,bordureG[1],-1):
+        if img[xFixe,z]==255:
+                bordureD=[xFixe,z]
+                break
+        
+    point=[xFixe,(bordureD[1]+bordureG[1])/2]
+
+    #visuel
+    for x in range(-15,15):
+        for y in range(-15,15):
+                if point[1]+y>0 & point[1]+y<640:
+                   
+                    img[point[0]+x,point[1]+y]=0
+    
+    cv.imshow('image',img)
+    
 
 
 cap = cv.VideoCapture(1)
@@ -91,8 +130,9 @@ def noir():
         #laplacian = cv.Laplacian(dilatation, cv.CV_64F)
 
         cv.imshow('contour',sobelx)
-        detectionCourbe(dilatation,width)
+        #detectionCourbe(dilatation,width)
 
+        virage(dilatation,width)
 
         """
         nbDivisions = 3
@@ -127,6 +167,7 @@ def noir():
     cap.release()
     cv.destroyAllWindows()
 
+"""
 ##Suivi de ligne rouge
 def rouge():
     while(True):
@@ -155,3 +196,4 @@ def rouge():
     # When everything done, release the capture
     cap.release()
     cv.destroyAllWindows()
+"""
