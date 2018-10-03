@@ -55,21 +55,25 @@ def valueToRPS(value):
 
 
 
-ports = pd.get_available_ports()
-if not ports:
-    exit ('No port')
-print ("Found ports", ports)
+def connect ():
+    ports = pd.get_available_ports()
+    if not ports:
+        exit ('No port')
+        print ("Found ports", ports)
 
-print('Connecting on the first available port:', ports[0])
-dxl_io = pd.DxlIO(ports[0])
+    print('Connecting on the first available port:', ports[0])
+    return pd.DxlIO(ports[0])
 
 
 # In[30]:
 
+def test ():
 
-dxl_io.set_wheel_mode([1])
-dxl_io.set_wheel_mode([2])
+    dxl_io = connect ()
+    dxl_io.set_wheel_mode([1])
+    dxl_io.set_wheel_mode([2])
 
+<<<<<<< HEAD
 stop()
 
 while True:
@@ -78,6 +82,18 @@ while True:
     time.sleep(1)
     stop()
     time.sleep(2)
+=======
+    stop()
+    while True:
+        avance(10)
+        time.sleep(.500)
+        recule(10)
+        time.sleep(.500)
+        tourne(90,10)
+        time.sleep(.500)
+        stop()
+        time.sleep(1)
+>>>>>>> 1b3a4a5e1511ca1ab1a8ad19526276f664644706
 
 
 
