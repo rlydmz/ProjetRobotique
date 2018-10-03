@@ -23,6 +23,14 @@ def forward(puissance=10):
     dxl_io.set_moving_speed({1:puissance})
     dxl_io.set_moving_speed({2:-puissance})
 
+def forward_by(distance, speed): #speed en cm/s
+    value = NTS*speed/PERIMETER
+    print(value)
+    print(distance/float(speed))
+    forward(value)
+    time.sleep(distance/float(speed))
+    stop()
+
 def backward(puissance=10):
     dxl_io.set_moving_speed({1:-puissance})
     dxl_io.set_moving_speed({2:puissance})
@@ -62,13 +70,9 @@ dxl_io = pd.DxlIO(ports[0])
 dxl_io.set_wheel_mode([1])
 dxl_io.set_wheel_mode([2])
 
-while True:
-    forward(NTS)
-    time.sleep(1)
-    backward(NTS)
-    time.sleep(1)
-    stop()
-    time.sleep(2)
+
+forward_by(29.7,10)
+
 
 # In[28]:
 
