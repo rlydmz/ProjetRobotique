@@ -5,16 +5,24 @@
 
 
 import pypot.dynamixel as pd
-#import keyboard as kb
 import time
+import math
 from sys import exit
 
+KR = 1.339
+NTS = 60/1.339
+
+PERIMETER = 16.3
+RADIUS = PERIMETER/(2*math.pi)
 
 def stop():
     dxl_io.set_moving_speed({1:0})
     dxl_io.set_moving_speed({2:0})
 
 def forward(puissance=10):
+
+    #RADIUS/100*valueToRPS(value) = distance
+
     dxl_io.set_moving_speed({1:-puissance})
     dxl_io.set_moving_speed({2:puissance})
 
@@ -36,6 +44,16 @@ def signeDe(nombre):
     else:
         return -1
 
+def degreesToRadian(angle):
+    return (angle*2*math.pi/360)
+
+def valueToNTS(value):
+    return 1.339*value/60
+
+def valueToRPS(value):
+    return valueToNTS(value)*2*math.pi
+
+
 
 ports = pd.get_available_ports()
 if not ports:
@@ -53,16 +71,13 @@ dxl_io.set_wheel_mode([1])
 dxl_io.set_wheel_mode([2])
 
 stop()
-""
+
 while True:
-    avance(10)
-    time.sleep(.500)
-    recule(10)
-    time.sleep(.500)
-    tourne(90,10)
-    time.sleep(.500)
-    stop()
+    forward(NTS)
+    #dxl_io.set_goal_position([1])
     time.sleep(1)
+    stop()
+    time.sleep(2)
 
 
 
