@@ -59,7 +59,7 @@ def virage(img):
     return (point, angleFinal)
 
 
-cap = cv.VideoCapture(1)
+cap = cv.VideoCapture(0)
 
 # FONCTIONS COULEURS
 
