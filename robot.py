@@ -5,6 +5,7 @@
 import time
 import TestFonctionV2 as cam
 import from_A_to_B as move
+from test_moteur import stop
 
 vitesse=10
 
