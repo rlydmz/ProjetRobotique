@@ -74,7 +74,7 @@ def backward_by(distance, speed=10): #speed en cm/s
     stop()
 
 
-def forward_by(distance, speed=10): #speed en cm/s
+    def forward_by(distance, speed=10): #speed en cm/s
     power = NTS*speed/PERIMETER
     #print(power)
     #print(distance/float(speed))
@@ -101,6 +101,7 @@ def turn_by (angle, speed=10):
         turn_right (wheel_dist, speed)
     else:
         turn_left (wheel_dist, speed)
+
 
 
 ######################################################################
