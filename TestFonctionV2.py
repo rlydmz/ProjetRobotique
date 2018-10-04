@@ -67,51 +67,51 @@ cap = cv.VideoCapture(1)
 
 
 def noir():
-    while(True):
-        # Capture des frames
-        ret, frame = cap.read(cv.IMREAD_UNCHANGED)
+    
+    # Capture des frames
+    ret, frame = cap.read(cv.IMREAD_UNCHANGED)
 
-        # Affichages des frames
-        cv.imshow('frame', frame)
+    # Affichages des frames
+    cv.imshow('frame', frame)
 
-        height = frame.shape[0]
-        width = frame.shape[1]
-        channels = frame.shape[2]
+    height = frame.shape[0]
+    width = frame.shape[1]
+    channels = frame.shape[2]
 
-        # Gaussian blurring
-        frame_blur = cv.GaussianBlur(frame, (5, 5), 0)
-        cv.imshow('frame_blur', frame_blur)
+    # Gaussian blurring
+    frame_blur = cv.GaussianBlur(frame, (5, 5), 0)
+    cv.imshow('frame_blur', frame_blur)
 
-        # seuillage
-        #ret2, frame_gray=cap.read(cv.IMREAD_GRAYSCALE)
-        gray = cv.cvtColor(frame_blur, cv.COLOR_BGR2GRAY)
-        _, img_seuil = cv.threshold(gray, 100, 2555, cv.THRESH_BINARY_INV)
+    # seuillage
+    #ret2, frame_gray=cap.read(cv.IMREAD_GRAYSCALE)
+    gray = cv.cvtColor(frame_blur, cv.COLOR_BGR2GRAY)
+    _, img_seuil = cv.threshold(gray, 100, 2555, cv.THRESH_BINARY_INV)
 
-        #imgContour, contours, hierarchy = cv.findContours(img_seuil, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
-        #cv.drawContours(imgContour, contours, -1, (255,255,0), 3)
+    #imgContour, contours, hierarchy = cv.findContours(img_seuil, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    #cv.drawContours(imgContour, contours, -1, (255,255,0), 3)
 
-        #Ouverture = erosion + dilatation
-        kernel = np.ones((15, 15), np.uint8)
-        erosion = cv.erode(img_seuil, kernel, iterations=1)
-        dilatation = cv.dilate(erosion, kernel, iterations=1)
+    #Ouverture = erosion + dilatation
+    kernel = np.ones((15, 15), np.uint8)
+    erosion = cv.erode(img_seuil, kernel, iterations=1)
+    dilatation = cv.dilate(erosion, kernel, iterations=1)
 
-        cv.imshow('frame_gray', img_seuil)
-        # cv.imshow('erosion',erosion)
-        cv.imshow('dilatation', dilatation)
+    cv.imshow('frame_gray', img_seuil)
+    # cv.imshow('erosion',erosion)
+    cv.imshow('dilatation', dilatation)
 
-        # detection de contours verticaux
-        sobelx = cv.Sobel(dilatation, cv.CV_64F, 1, 0, ksize=5)
-        #laplacian = cv.Laplacian(dilatation, cv.CV_64F)
+    # detection de contours verticaux
+    sobelx = cv.Sobel(dilatation, cv.CV_64F, 1, 0, ksize=5)
+    #laplacian = cv.Laplacian(dilatation, cv.CV_64F)
 
-        # cv.imshow('contour',sobelx)
-        # detectionCourbe(dilatation,width)
+    # cv.imshow('contour',sobelx)
+    # detectionCourbe(dilatation,width)
 
-        (coordonnees, angleFinal) = virage(dilatation)
+    (coordonnees, angleFinal) = virage(dilatation)
+    
+    if cv.waitKey(1) & 0xFF == ord('q'):
+        break
 
-        if cv.waitKey(1) & 0xFF == ord('q'):
-            break
-
-        return (coordonnees, angleFinal)
+    return (coordonnees, angleFinal)
 
     # When everything done, release the capture
     cap.release()
@@ -135,9 +135,13 @@ def rouge():
         cv.imshow('frame_blur', frame_blur)
 
         #composante rouge de chaque pixel
-         for x in range (0, frame_blur.shape[0]-1)
-             for y in range (0, frame_blur.shape[1]-1)
+
+        img_rouge=np.zeros(frame_blur.shape[0],frame_blur.shape[1])
+        for x in range (0, frame_blur.shape[0]-1):
+             for y in range (0, frame_blur.shape[1]-1):
                  img_rouge[x][y]=frame_blur[x][y][2]
+
+        print(img_rouge)
 
         # seuillage
         #ret2, frame_gray=cap.read(cv.IMREAD_GRAYSCALE)
