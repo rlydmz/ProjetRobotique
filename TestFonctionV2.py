@@ -44,6 +44,7 @@ def virage(img):
             bordureD = [xFixe, z]
             break
 
+    print ("bordureD" bordureD, "bordureG" bordureG)
     point = [xFixe, (bordureD[1] + bordureG[1]) / 2]
 
     angleFinal = angle(point, largeur, longueur)
