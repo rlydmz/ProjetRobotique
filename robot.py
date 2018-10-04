@@ -13,7 +13,6 @@ def parcours():
     #Detection de la ligne noire
     while(True):
         debut=time.time()
-        print(coordonnes)
         (coordonnes,angleFinal)=cam.noir()
         pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
         print(coordonnes)
