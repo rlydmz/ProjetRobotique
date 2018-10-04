@@ -2,6 +2,7 @@ import numpy as np
 import cv2 as cv
 import math
 
+
 """def detectionCourbe(img,width):
     couloir=100
     zone=100
@@ -49,7 +50,45 @@ def detectionParcours(frame,width):
         print('Attention,virage !')
 """
 
-def virage(img,width):
+def angle(point, largeur, longueur):
+
+    B=point
+    A=[largeur-1,longueur//2]
+    C=[B[0],A[1]]
+    signe=1
+    
+    AB=math.sqrt((B[0]-A[0])**2+(B[1]-A[1])**2)
+    
+    if((B[1]-A[1])<0):
+       signe=-1
+       
+    teta=signe*math.atan2(abs(B[1]-A[1]),abs(B[0]-A[0]))
+    tetaDegre=math.degrees(teta)
+
+    print(tetaDegre)
+    return(tetaDegre)
+
+    """
+    B=point
+    A=[largeur-1,longueur//2]
+    C=[0,longueur//2]
+    x1=B[0]-A[0]
+    y1=B[1]-A[1]
+    x2=C[0]-A[0]
+    y2=C[1]-A[1]
+    d=x2*y1-y2*x1
+
+    print(d)
+
+    angleRadian=math.acos(d/(math.sqrt(x1**2+y1**2)*math.sqrt(x2**2+y2**2)))
+    angleDegre=math.degrees(angleRadian)
+    
+    print(angleDegre)
+    #angleRadian=math.arccos(delta/(math.sqrt(v2[0]**2+v2[1]**2)))
+    #angleDegre=math.degrees(angleRadian)
+    """
+
+def virage(img):
     largeur=img.shape[0]
     longueur=img.shape[1]
     i=0
@@ -76,6 +115,8 @@ def virage(img,width):
         
     point=[xFixe,(bordureD[1]+bordureG[1])/2]
 
+    angleFinal=angle(point, largeur, longueur)
+
     #visuel
     for x in range(-15,15):
         for y in range(-15,15):
@@ -84,7 +125,7 @@ def virage(img,width):
                     img[point[0]+x,point[1]+y]=0
     
     cv.imshow('image',img)
-    
+    return (point,angleFinal)
 
 
 cap = cv.VideoCapture(1)
@@ -118,21 +159,27 @@ def noir():
         #cv.drawContours(imgContour, contours, -1, (255,255,0), 3)
 
         #Ouverture = erosion + dilatation
-        kernel = np.ones((5,5),np.uint8)
+        kernel = np.ones((7,7),np.uint8)
         erosion = cv.erode(img_seuil,kernel,iterations = 1)
         dilatation = cv.dilate(img_seuil,kernel,iterations = 1)
 
+        #nettoyage
+        ret,labels=cv.connectedComponents(dilatation)
+        print(ret)
+
         cv.imshow('frame_gray',img_seuil)
         #cv.imshow('erosion',erosion)
+        cv.imshow('dilatation',dilatation)
 
         #detection de contours verticaux
         sobelx = cv.Sobel(dilatation, cv.CV_64F,1,0,ksize=5)
         #laplacian = cv.Laplacian(dilatation, cv.CV_64F)
 
-        cv.imshow('contour',sobelx)
+        #cv.imshow('contour',sobelx)
         #detectionCourbe(dilatation,width)
 
-        virage(dilatation,width)
+        (coordonnees,angleFinal)=virage(dilatation)
+        
 
         """
         nbDivisions = 3
@@ -162,6 +209,8 @@ def noir():
             
         if cv.waitKey(1) & 0xFF == ord('q'):
             break
+
+        return (coordonnees,angleFinal)
 
     # When everything done, release the capture
     cap.release()

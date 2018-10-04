@@ -74,7 +74,7 @@ def backward_by(distance, speed=10): #speed en cm/s
     stop()
 
 
-    def forward_by(distance, speed=10): #speed en cm/s
+def forward_by(distance, speed=10): #speed en cm/s
     power = NTS*speed/PERIMETER
     #print(power)
     #print(distance/float(speed))
@@ -92,18 +92,15 @@ def turn_by (angle, speed=10):
         angle %= 360
     else:
         angle %= -360
-    print(angle)
+
     wheel_dist = ROBOT_WIDTH*(abs(angle)*2*math.pi/360)
 
     print ("Turn_by:", angle, " degrees with", speed, "cm/s")
 
-    if 0 <= angle <= 180 or -360 < angle <= -180:
+    if 0 <= angle <= 180 or -360 < -angle <= -180:
         turn_right (wheel_dist, speed)
-        print ("turn_right")
     else:
         turn_left (wheel_dist, speed)
-        print ("turn_left")
-
 
 
 ######################################################################
@@ -124,6 +121,14 @@ def start():
 
 
 dxl_io = start()
+
+
+while True:
+    presentSpeed1 = dxl_io.get_present_speed([1])
+    presentSpeed2 = dxl_io.get_present_speed([2])
+    wheelSpeed1 = presentSpeed1*PERIMETER/NTS
+    wheelSpeed2 = pre
+
 #forward_by(24,10)
 #turn(10,10)
 #time.sleep(1)
