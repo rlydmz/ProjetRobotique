@@ -4,7 +4,7 @@
 
 import time
 import TestFonctionV2 as cam
-#import from_A_to_B as move
+import from_A_to_B as move
 
 vitesse=10
 
@@ -14,7 +14,7 @@ def parcours():
         debut=time.time()
         (coordonnes,angleFinal)=cam.noir()
         pointSuivant=[coordonnes[0]/float(120),coordonnes[1]/float(116),angleFinal]
-        #move.go_to(vitesse,pointSuivant)
+        move.go_to(vitesse,pointSuivant)
         fin=time.time()
         duree=fin-debut
         frequence=1/duree
