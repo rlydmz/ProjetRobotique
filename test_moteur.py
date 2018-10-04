@@ -92,12 +92,12 @@ def turn_by (angle, speed=10):
         angle %= 360
     else:
         angle %= -360
-
+    print(angle)
     wheel_dist = ROBOT_WIDTH*(abs(angle)*2*math.pi/360)
 
     print ("Turn_by:", angle, " degrees with", speed, "cm/s")
 
-    if 0 <= angle <= 180 or -360 < -angle <= -180:
+    if 0 <= angle <= 180 or -360 < angle <= -180:
         turn_right (wheel_dist, speed)
     else:
         turn_left (wheel_dist, speed)
