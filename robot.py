@@ -3,9 +3,8 @@
 ###INTEGRATION Fonctions vision et moteur
 
 import time
-import TestFonctions as vis
-import test_moteur as mot
-import from_A_to_B as move
+import TestFonctionV2 as cam
+#import from_A_to_B as move
 
 vitesse=10
 
@@ -13,11 +12,11 @@ def parcours():
     #Detection de la ligne noire
     while(True):
         debut=time.time()
-        (coordonnes,angleFinal)=vis.noir()
+        (coordonnes,angleFinal)=cam.noir()
         pointSuivant=[coordonnes[0]/float(120),coordonnes[1]/float(116),angleFinal]
-        move.go_to(vitesse,pointSuivant)
+        #move.go_to(vitesse,pointSuivant)
         fin=time.time()
-        dure=fin-debut
+        duree=fin-debut
         frequence=1/duree
         print(frequence)
         

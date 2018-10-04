@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import numpy as np
 import cv2 as cv
 import math
@@ -17,7 +19,6 @@ def angle(point, largeur, longueur):
     teta = signe * math.atan2(abs(B[1] - A[1]), abs(B[0] - A[0]))
     tetaDegre = math.degrees(teta)
 
-    print(tetaDegre)
     return(tetaDegre)
 
 
@@ -25,7 +26,7 @@ def virage(img):
     largeur = img.shape[0]
     longueur = img.shape[1]
 
-    # point 1 on le regarde au milieu de l'image: on fixele point à largeur//2
+    # point 1 on le regarde au milieu de l'image: on fixele point Ã  largeur//2
     xFixe = largeur // 2
 
     bordureG = [xFixe, 0]
@@ -45,6 +46,7 @@ def virage(img):
 
     angleFinal = angle(point, largeur, longueur)
 
+    """
     # visuel
     for x in range(-15, 15):
         for y in range(-15, 15):
@@ -53,6 +55,7 @@ def virage(img):
                 img[point[0] + x, point[1] + y] = 0
 
     cv.imshow('image', img)
+    """
     return (point, angleFinal)
 
 
@@ -88,13 +91,9 @@ def noir():
         #cv.drawContours(imgContour, contours, -1, (255,255,0), 3)
 
         #Ouverture = erosion + dilatation
-        kernel = np.ones((7, 7), np.uint8)
+        kernel = np.ones((15, 15), np.uint8)
         erosion = cv.erode(img_seuil, kernel, iterations=1)
-        dilatation = cv.dilate(img_seuil, kernel, iterations=1)
-
-        # nettoyage
-        ret, labels = cv.connectedComponents(dilatation)
-        print(ret)
+        dilatation = cv.dilate(erosion, kernel, iterations=1)
 
         cv.imshow('frame_gray', img_seuil)
         # cv.imshow('erosion',erosion)
