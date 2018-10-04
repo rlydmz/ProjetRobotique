@@ -110,7 +110,8 @@ def noir():
     
     #if cv.waitKey(1) & 0xFF == ord('q'):
         #break
-
+    
+    print(coordonnees, angleFinal)
     return (coordonnees, angleFinal)
 
     # When everything done, release the capture
