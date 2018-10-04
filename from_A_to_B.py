@@ -63,5 +63,5 @@ def go_to (speed, B=[0,0,0]):
 # In[ ]:
 
 
-go_to (B);
+#go_to (B);
 
