@@ -14,11 +14,12 @@ def parcours():
         debut=time.time()
         (coordonnes,angleFinal)=cam.noir()
         pointSuivant=[coordonnes[0]/float(120),coordonnes[1]/float(116),angleFinal]
-        move.go_to(vitesse,pointSuivant)
+        move.go_to(pointSuivant,vitesse)
         fin=time.time()
         duree=fin-debut
         frequence=1/duree
-        print(frequence)
+        time.sleep(2)
+        #print(frequence)
         
     
     

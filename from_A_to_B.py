@@ -49,7 +49,7 @@ def move_by (distance, speed):
 def go_to (B, speed=10):
     x1, y1, angle1 = B[0], B[1], B[2] % 360
 
-    angleToTurn = calculate_angle ([0,0], [x1,y1])
+    angleToTurn = angle1
     distance = calculate_distance ([0,0], [x1,y1])
 
     # arrival to destination point
