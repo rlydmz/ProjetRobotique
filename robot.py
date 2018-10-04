@@ -14,7 +14,7 @@ def parcours():
     while(True):
         debut=time.time()
         (coordonnes,angleFinal)=cam.noir()
-        pointSuivant=[(coordonnes[1]-320)/float(120),(480-coordonnes[0])/float(116),angleFinal]
+        pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
         move.go_to(pointSuivant,vitesse)
         fin=time.time()
         duree=fin-debut
