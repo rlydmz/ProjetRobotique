@@ -18,7 +18,7 @@ def parcours():
         fin=time.time()
         duree=fin-debut
         frequence=1/duree
-        print(frequence)
+        #print(frequence)
         
     
     
