@@ -69,7 +69,7 @@ cap = cv.VideoCapture(1)
 def noir():
     
     # Capture des frames
-    ret, frame = cap.read(cv.IMREAD_UNCHANGED)
+    ret, frame = cap.read()
 
     # Affichages des frames
     #cv.imshow('frame', frame)
