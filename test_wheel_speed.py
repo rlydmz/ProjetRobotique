@@ -7,6 +7,7 @@
 import pypot.dynamixel as pd
 import time
 import math
+import keyboard as kb
 from sys import exit
 
 KR = 1.339
@@ -16,6 +17,8 @@ ROBOT_WIDTH = 15.3
 
 PERIMETER = 16.3
 RADIUS = PERIMETER/(2*math.pi)
+
+DELTA_T = 0.05 #En secondes
 
 def stop():
     dxl_io.set_moving_speed({1:0})
@@ -42,6 +45,10 @@ def turn_left(distance, speed=10): #speed en cm/s
     dxl_io.set_moving_speed({2:-value})
     time.sleep(distance/float(speed))
     stop()
+
+def turn_both_wheels(leftWheelSpeed, rightWheelSpeed):
+    dxl_io.set_moving_speed({1:leftWheelSpeed})
+    dxl_io.set_moving_speed({2:-rightWheelSpeed})
 
 def backward(puissance=10):
     dxl_io.set_moving_speed({1:-puissance})
@@ -105,6 +112,31 @@ def turn_by (angle, speed=10):
 
 ######################################################################
 
+def odometry(dxl_io):
+    dxl_io.set_joint_mode([1])
+    dxl_io.set_joint_mode([2])
+    dxl_io.set_wheel_mode([1])
+    dxl_io.set_wheel_mode([2])
+
+    last_time = int(round(time.time() * 1000))
+
+    while True:
+        if keyboard.is_pressed('s'):
+            break
+        delta_time = int(round(time.time() * 1000))-last_time
+        movingSpeed1 = dxl_io.get_moving_speed([1])
+        movingSpeed2 = dxl_io.get_moving_speed([2])
+        wheelSpeed1 = movingSpeed1[0]*PERIMETER/NTS
+        wheelSpeed2 = movingSpeed2[0]*PERIMETER/NTS
+        dw1 = dw1 + wheelSpeed1*delta_time
+        dw2 = dw2 + wheelSpeed2*delta_time
+        time.sleep(DELTA_T)
+
+    distance = 0
+    #CALCUL DE LA DISTANCE
+    return distance    
+
+#######################################################################
 def start():
     ports = pd.get_available_ports()
     if not ports:
@@ -122,12 +154,9 @@ def start():
 
 dxl_io = start()
 
+distance = odometry(dxl_io)
 
-while True:
-    presentSpeed1 = dxl_io.get_present_speed([1])
-    presentSpeed2 = dxl_io.get_present_speed([2])
-    wheelSpeed1 = presentSpeed1*PERIMETER/NTS
-    wheelSpeed2 = pre
+print(distance)
 
 #forward_by(24,10)
 #turn(10,10)
