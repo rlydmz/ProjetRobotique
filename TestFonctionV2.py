@@ -72,7 +72,7 @@ def noir():
     ret, frame = cap.read(cv.IMREAD_UNCHANGED)
 
     # Affichages des frames
-    cv.imshow('frame', frame)
+    #cv.imshow('frame', frame)
 
     height = frame.shape[0]
     width = frame.shape[1]
@@ -80,7 +80,7 @@ def noir():
 
     # Gaussian blurring
     frame_blur = cv.GaussianBlur(frame, (5, 5), 0)
-    cv.imshow('frame_blur', frame_blur)
+    #cv.imshow('frame_blur', frame_blur)
 
     # seuillage
     #ret2, frame_gray=cap.read(cv.IMREAD_GRAYSCALE)
@@ -95,7 +95,7 @@ def noir():
     erosion = cv.erode(img_seuil, kernel, iterations=1)
     dilatation = cv.dilate(erosion, kernel, iterations=1)
 
-    cv.imshow('frame_gray', img_seuil)
+    #cv.imshow('frame_gray', img_seuil)
     # cv.imshow('erosion',erosion)
     cv.imshow('dilatation', dilatation)
 
@@ -108,8 +108,8 @@ def noir():
 
     (coordonnees, angleFinal) = virage(dilatation)
     
-    if cv.waitKey(1) & 0xFF == ord('q'):
-        break
+    #if cv.waitKey(1) & 0xFF == ord('q'):
+        #break
 
     return (coordonnees, angleFinal)
 
