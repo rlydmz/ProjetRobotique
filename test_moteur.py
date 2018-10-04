@@ -73,8 +73,7 @@ def backward_by(distance, speed=10): #speed en cm/s
     time.sleep(distance/float(speed))
     stop()
 
-
-    def forward_by(distance, speed=10): #speed en cm/s
+def forward_by(distance, speed=10): #speed en cm/s
     power = NTS*speed/PERIMETER
     #print(power)
     #print(distance/float(speed))
