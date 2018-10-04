@@ -20,7 +20,7 @@ from test_moteur import *
 
 
 def calculate_angle (A, B):
-    angleInRadians = math.atan2(B[1] - A[1], B[0] - A[0])
+    angleInRadians = math.atan2(-(B[1] - A[1]), -(B[0] - A[0]))
     return math.degrees (angleInRadians)
 
 
@@ -47,7 +47,7 @@ def move_by (distance, speed):
 
 # Go to B =[x,y,finalAngle]] and speed in cm/s
 def go_to (B, speed=10):
-    print( B[0], B[1], B[2])
+    print( B[0], B[1])
     x1, y1, angle1 = B[0], B[1], B[2]
 
     angleToTurn = calculate_angle ([0,0], [x1,y1])
