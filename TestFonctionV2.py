@@ -69,7 +69,7 @@ cap = cv.VideoCapture(0)
 
 
 def noir():
-    
+
     # Capture des frames
     ret, frame = cap.read()
 
@@ -109,11 +109,11 @@ def noir():
     # detectionCourbe(dilatation,width)
 
     (coordonnees, angleFinal) = virage(dilatation)
-    
+
     #if cv.waitKey(1) & 0xFF == ord('q'):
         #break
-    
-    print("FONCTION NOIR() ", coordonnees, angleFinal)
+
+    print("FONCTION NOIR() ", coordonnees)
     return (coordonnees, angleFinal)
 
     # When everything done, release the capture
@@ -177,4 +177,3 @@ def rouge():
     # When everything done, release the capture
     cap.release()
     cv.destroyAllWindows()
-
