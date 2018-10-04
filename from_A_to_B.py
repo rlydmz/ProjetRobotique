@@ -59,6 +59,6 @@ def go_to (B, speed=10):
     # put the bot on the final desired angle
 
     finalAngleToTurn = angle1 - angleToTurn
-    turn_by (finalAngleToTurn, speed)
+    #turn_by (finalAngleToTurn, speed)
 
 
