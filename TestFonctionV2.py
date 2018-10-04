@@ -116,3 +116,58 @@ def noir():
     # When everything done, release the capture
     cap.release()
     cv.destroyAllWindows()
+
+
+def rouge():
+    while(True):
+        # Capture des frames
+        ret, frame = cap.read(cv.IMREAD_UNCHANGED)
+
+        # Affichages des frames
+        cv.imshow('frame', frame)
+
+        height = frame.shape[0]
+        width = frame.shape[1]
+        channels = frame.shape[2]
+
+        # Gaussian blurring
+        frame_blur = cv.GaussianBlur(frame, (5, 5), 0)
+        cv.imshow('frame_blur', frame_blur)
+
+        #composante rouge de chaque pixel
+         for x in range (0, frame_blur.shape[0]-1)
+             for y in range (0, frame_blur.shape[1]-1)
+                 img_rouge[x][y]=frame_blur[x][y][2]
+
+        # seuillage
+        #ret2, frame_gray=cap.read(cv.IMREAD_GRAYSCALE)
+        gray = cv.cvtColor(img_rouge, cv.COLOR_BGR2GRAY)
+        _, img_seuil = cv.threshold(gray, 100, 255, cv.THRESH_BINARY_INV)
+
+        #Ouverture = erosion + dilatation
+        kernel = np.ones((15, 15), np.uint8)
+        erosion = cv.erode(img_seuil, kernel, iterations=1)
+        dilatation = cv.dilate(erosion, kernel, iterations=1)
+
+        cv.imshow('frame_gray', img_seuil)
+        # cv.imshow('erosion',erosion)
+        cv.imshow('dilatation', dilatation)
+
+        # detection de contours verticaux
+        sobelx = cv.Sobel(dilatation, cv.CV_64F, 1, 0, ksize=5)
+        #laplacian = cv.Laplacian(dilatation, cv.CV_64F)
+
+        # cv.imshow('contour',sobelx)
+        # detectionCourbe(dilatation,width)
+
+        (coordonnees, angleFinal) = virage(dilatation)
+
+        if cv.waitKey(1) & 0xFF == ord('q'):
+            break
+
+        return (coordonnees, angleFinal)
+
+    # When everything done, release the capture
+    cap.release()
+    cv.destroyAllWindows()
+
