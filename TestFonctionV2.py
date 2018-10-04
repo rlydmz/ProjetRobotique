@@ -16,7 +16,9 @@ def angle(point, largeur, longueur):
     if((B[1] - A[1]) < 0):
         signe = -1
 
-    teta = signe * math.atan2(abs(B[1] - A[1]), abs(B[0] - A[0]))
+    CB=math.sqrt((B[0] - C[0])**2 + (B[1] - C[1])**2)
+    CA=math.sqrt((A[0] - C[0])**2 + (A[1] - C[1])**2)
+    teta = signe * math.atan2(CB, CA)
     tetaDegre = math.degrees(teta)
 
     return(tetaDegre)
