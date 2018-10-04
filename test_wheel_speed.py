@@ -118,7 +118,12 @@ def odometry(dxl_io):
     dxl_io.set_wheel_mode([1])
     dxl_io.set_wheel_mode([2])
 
+    y1=0
+    x1=0
+    teta=0
+    
     last_time = int(round(time.time() * 1000))
+    
 
     while True:
         if keyboard.is_pressed('s'):
@@ -130,6 +135,25 @@ def odometry(dxl_io):
         wheelSpeed2 = movingSpeed2[0]*PERIMETER/NTS
         dw1 = dw1 + wheelSpeed1*delta_time
         dw2 = dw2 + wheelSpeed2*delta_time
+        if (dw1>dw2):
+            dTeta = (dw1-dw2)/ROBOT_WIDTH
+            X=(ROBOT_WIDTH*dw2)/(dw1-dw2)
+            dy=(X+ROBOT_WIDTH/float(2))*math.sin(dTeta)
+            dx=(X+ROBOT_WIDTH/float(2))*(1-math/cos(dTeta))
+            y1+=dy*math.cos(teta)+math.sin(teta)*dy
+            x1+=-dx*math.sin(teta)+math.cos(teta)*dx
+            teta+=dTeta
+        elif (dw2>dw1):
+            dTeta = (dw2-dw1)/ROBOT_WIDTH
+            X=(ROBOT_WIDTH*dw1)/(dw2-dw1)
+            dy=(X+ROBOT_WIDTH/float(2))*math.sin(dTeta)
+            dx=(X+ROBOT_WIDTH/float(2))*(1-math/cos(dTeta))
+            y1+=dy*math.cos(teta)+math.sin(teta)*dy
+            x1+=-dx*math.sin(teta)+math.cos(teta)*dx
+            teta+=dTeta
+        else:
+            y1+=dw1*math.cos(teta)+math.sin(teta)*dw1
+            x1+=dw1*math.cos(teta)-math.sin(teta)*dw1
         time.sleep(DELTA_T)
 
     distance = 0
