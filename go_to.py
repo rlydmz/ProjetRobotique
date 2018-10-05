@@ -1,22 +1,12 @@
 
 # coding: utf-8
 
-# In[16]:
-
-
 # Angles are in degrees regarding the funciton arguments and parameters
-
-
-# In[1]:
-
 
 import math
 import pypot.dynamixel as pd
 
 from test_moteur import *
-
-
-# In[4]:
 
 
 
@@ -35,15 +25,10 @@ def calculate_angle(B, A, C):
 
     return(tetaDegre)
 
-# In[6]:
-
 
 # Returns the oblique distance between the two given points
 def calculate_distance (A, B):
      return math.sqrt((B[0] - A[0])**2 + (B[1] - A[1])**2)
-
-
-# In[7]:
 
 
 def move_by (distance, speed):
@@ -51,9 +36,6 @@ def move_by (distance, speed):
         forward_by (distance, speed)
     else:
         backward_by (distance, speed)
-
-
-# In[22]:
 
 
 # Go to B =[x,y,finalAngle]] and speed in cm/s

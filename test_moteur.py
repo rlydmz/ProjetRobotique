@@ -1,8 +1,6 @@
 
 # coding: utf-8
 
-# In[2]:
-
 
 import pypot.dynamixel as pd
 import time
@@ -73,6 +71,7 @@ def backward_by(distance, speed=10): #speed en cm/s
     time.sleep(distance/float(speed))
     stop()
 
+    
 def forward_by(distance, speed=10): #speed en cm/s
     power = NTS*speed/PERIMETER
 
@@ -86,7 +85,7 @@ def forward_by(distance, speed=10): #speed en cm/s
 def turn_by (angle, speed=10):
     signe = signeDe(angle)
 
-    # Deal with angles over 360
+    # Handle angles over 360
     if signe == 1:
         angle %= 360
     else:
@@ -102,7 +101,7 @@ def turn_by (angle, speed=10):
         turn_left (wheel_dist, speed)
 
 
-def turn_both_wheels(angle):
+def turn_both_wheels (angle):
     base_speed=20
     factor = 3 * abs(angle)/180
 
@@ -113,9 +112,6 @@ def turn_both_wheels(angle):
     elif angle < 0 and angle > -180:
         dxl_io.set_moving_speed({1:base_speed})
         dxl_io.set_moving_speed({2:-base_speed-(factor*base_speed*2)})
-
-
-#def continue_turn_by (angle)
 
 
 ######################################################################
@@ -134,12 +130,3 @@ def start():
     return dxl_io
 
 dxl_io = start()
-#forward_by(24,10)
-#turn(10,10)
-#time.sleep(1)
-#stop()
-
-# In[28]:
-
-
-#dxl_io.scan(range(10))
