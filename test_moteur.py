@@ -129,9 +129,7 @@ def start():
 
     dxl_io.set_wheel_mode([1])
     dxl_io.set_wheel_mode([2])
-
     return dxl_io
-
 
 dxl_io = start()
 #forward_by(24,10)
