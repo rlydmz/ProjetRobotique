@@ -154,6 +154,9 @@ def odometry(dxl_io):
         print("X = ",x1)
         print("Y = ",y1)
         print("ANGLE = ",teta*360/(2*math.pi))
+        print("R = "math.sqrt(x1*x1+y1*y1))
+        print("TETA POLAIRE = ",math.atan2(y1,x1))
+
         time.sleep(DELTA_T)
 
 #######################################################################
