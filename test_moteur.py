@@ -21,26 +21,24 @@ def stop():
     dxl_io.set_moving_speed({1:0})
     dxl_io.set_moving_speed({2:0})
 
-def forward(puissance=10):
-    dxl_io.set_moving_speed({1:puissance})
-    dxl_io.set_moving_speed({2:-puissance})
+def forward(speed=10):
+    dxl_io.set_moving_speed({1:speed})
+    dxl_io.set_moving_speed({2:-speed})
 
 def turn_right(distance, speed=10): #speed en cm/s
     #print(distance)
     #print(distance/float(speed))
     value = NTS*speed/PERIMETER
-    dxl_io.set_moving_speed({1:value})
-    dxl_io.set_moving_speed({2:0})
-    time.sleep(distance/float(speed))
+    dxl_io.set_moving_speed({1:value+speed})
+    dxl_io.set_moving_speed({2:speed})
     stop()
 
 def turn_left(distance, speed=10): #speed en cm/s
     #print(distance)
     #print(distance/float(speed))
     value = NTS*speed/PERIMETER
-    dxl_io.set_moving_speed({1:0})
-    dxl_io.set_moving_speed({2:-value})
-    time.sleep(distance/float(speed))
+    dxl_io.set_moving_speed({1:speed})
+    dxl_io.set_moving_speed({2:-value-speed})
     stop()
 
 def backward(puissance=10):
@@ -69,8 +67,13 @@ def backward_by(distance, speed=10): #speed en cm/s
     print(value)
     print(distance/float(speed))
     backward(value)
+<<<<<<< HEAD
+    print ("Backward_by:" distance "cm with" speed "cm/s")
+    #time.sleep(distance/float(speed))
+=======
     print ("Backward_by:", distance, "cm with", speed, "cm/s")
     time.sleep(distance/float(speed))
+>>>>>>> c0df8d33116c54d84a2a2e4bef23250362da7ff3
     stop()
 
 def forward_by(distance, speed=10): #speed en cm/s
@@ -78,8 +81,13 @@ def forward_by(distance, speed=10): #speed en cm/s
     #print(power)
     #print(distance/float(speed))
     forward(power)
+<<<<<<< HEAD
+    print ("Forward_by:" distance "cm with" speed "cm/s")
+    #time.sleep(distance/float(speed))
+=======
     print ("Forward_by:", distance, "cm with", speed, "cm/s")
     time.sleep(distance/float(speed))
+>>>>>>> c0df8d33116c54d84a2a2e4bef23250362da7ff3
     stop()
 
 
@@ -102,6 +110,7 @@ def turn_by (angle, speed=10):
         turn_left (wheel_dist, speed)
 
 
+def continue_turn_by (angle)
 
 
 ######################################################################
