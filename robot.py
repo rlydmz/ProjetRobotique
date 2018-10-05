@@ -20,24 +20,47 @@ def s ():
 
 
 # Parcours
-def p ():
-    while(True):
-        try:
-            debut=time.time()
-            (coordonnes,angleFinal)=cam.noir()
-            print("Coordonnes pointSuivant robot.py: ",coordonnes)
+def p (couleur):
+    if(couleur==0):
+        while(True):
+            try:
+                debut=time.time()
+                (coordonnes,angleFinal)=cam.noir()
+                print("Coordonnes pointSuivant robot.py: ",coordonnes)
+                
+                pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
             
-            pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
-        
-            tt.turn_both_wheels(angleFinal)
-            
-            fin=time.time()
-            duree=fin-debut
-            frequence=1/duree
-            
-            print ("frequence:", frequence)
-            print("\n\n")
+                tt.turn_both_wheels(angleFinal)
+                
+                fin=time.time()
+                duree=fin-debut
+                frequence=1/duree
+                
+                print ("frequence:", frequence)
+                print("\n\n")
 
-        except KeyboardInterrupt:
-            s()
-            sys.exit()
+            except KeyboardInterrupt:
+                s()
+                sys.exit()
+
+    if(couleur==1):
+        while(True):
+            try:
+                debut=time.time()
+                (coordonnes,angleFinal)=cam.rouge()
+                print("Coordonnes pointSuivant robot.py: ",coordonnes)
+                
+                pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
+            
+                tt.turn_both_wheels(angleFinal)
+                
+                fin=time.time()
+                duree=fin-debut
+                frequence=1/duree
+                
+                print ("frequence:", frequence)
+                print("\n\n")
+
+            except KeyboardInterrupt:
+                s()
+                sys.exit()
