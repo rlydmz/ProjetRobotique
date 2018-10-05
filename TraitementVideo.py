@@ -32,12 +32,12 @@ while(True):
     cv.imshow('frame_blur',frame_blur)
 
     #HSV
-    hsv = cv.cvtColor(frame_blur,cv.COLOR_BGR2HSV)
-    cv.imshow('hsv',hsv)
+    #hsv = cv.cvtColor(frame_blur,cv.COLOR_BGR2HSV)
+    #cv.imshow('hsv',hsv)
 
     #segmentation couleur
-    blue,green,red = cv.split(frame_blur)
-    cv.imshow('red',red)
+    #blue,green,red = cv.split(frame_blur)
+    #cv.imshow('red',red)
     cv.imshow('blue',blue)
     cv.imshow('green',green)
 
