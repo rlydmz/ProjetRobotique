@@ -19,6 +19,20 @@ def s ():
 
 
 def p():
+<<<<<<< HEAD
+=======
+    #Detection de la ligne noire
+    while(True):
+        debut=time.time()
+        (coordonnes,angleFinal)=cam.noir()
+        print("Coordonnes pointSuivant robot.py: ",coordonnes)
+        pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
+        tt.turn_both_wheels(angleFinal)
+        #tt.forward()
+        fin=time.time()
+        duree=fin-debut
+        frequence=1/duree
+>>>>>>> c5cfcf68b2b55ac0cf73944282521bdf4060f709
 
 
     #Detection de la ligne noire

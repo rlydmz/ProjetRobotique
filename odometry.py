@@ -1,7 +1,7 @@
 import pypot.dynamixel as pd
 import time
 import math
-#import keyboard as kb
+import keyboard as kb
 from sys import exit
 
 KR = 1.339
@@ -147,7 +147,7 @@ def odometry(dxl_io):
             dx=(X+ROBOT_WIDTH/float(2))*(1-math.cos(dTeta))
             y1+=dy*math.cos(teta)-math.sin(teta)*dx
             x1+=dy*math.sin(teta)+math.cos(teta)*dx
-            teta+=dTeta
+            teta-=dTeta
         else:
             y1+=math.cos(teta)*dw1
             x1+=dw1*math.sin(teta)
@@ -169,10 +169,7 @@ def start():
     dxl_io.set_wheel_mode([1])
     dxl_io.set_wheel_mode([2])
 
-    while True:
-	print(dxl_io.get_moving_speed([1])
-
-    #return dxl_io
+    return dxl_io
 
 dxl_io = start()
 
