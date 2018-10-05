@@ -54,9 +54,8 @@ def virage(img):
     # visuel
     for x in range(-15, 15):
         for y in range(-15, 15):
-            if point[1] + y > 0 and point[1] + y < 640:
+            if point[1] + y > 0 and point[1] + y <320:
                     img[point[0] + x, point[1] + y] = 0
-
     cv.imshow('image', img)
     
     return (point, angleFinal)
@@ -64,6 +63,8 @@ def virage(img):
 
 cap = cv.VideoCapture(0)
 
+ret=cap.set(3,320)
+ret=cap.set(4,240)
 # FONCTIONS COULEURS
 
 # Suivi de ligne noire
@@ -72,14 +73,14 @@ cap = cv.VideoCapture(0)
 def noir():
     # Capture des frames
     ret, frame = cap.read()
-
+                       
     # Affichages des frames
     #cv.imshow('frame', frame)
 
     height = frame.shape[0]
     width = frame.shape[1]
     channels = frame.shape[2]
-
+ 
     # Gaussian blurring
     frame_blur = cv.GaussianBlur(frame, (5, 5), 0)
     #cv.imshow('frame_blur', frame_blur)
@@ -96,10 +97,11 @@ def noir():
     kernel = np.ones((15, 15), np.uint8)
     erosion = cv.erode(img_seuil, kernel, iterations=1)
     dilatation = cv.dilate(erosion, kernel, iterations=1)
-
+  
+    
     #cv.imshow('frame_gray', img_seuil)
     # cv.imshow('erosion',erosion)
-    cv.imshow('dilatation', dilatation)
+#    cv.imshow('dilatation', dilatation)
     cv.waitKey(10)
 
     # detection de contours verticaux

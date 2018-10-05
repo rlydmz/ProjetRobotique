@@ -4,18 +4,21 @@
 
 import time
 import TestFonctionV2 as cam
+import test_moteur as tt
 import from_A_to_B as move
+import cv2 as cv
 
 vitesse=10
 
-def parcours():
+def p():
     #Detection de la ligne noire
     while(True):
         debut=time.time()
         (coordonnes,angleFinal)=cam.noir()
         print("Coordonnes pointSuivant robot.py: ",coordonnes)
         pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
-        move.go_to(pointSuivant,vitesse)
+        #move.go_to(pointSuivant,vitesse)
+        tt.forward()
         fin=time.time()
         duree=fin-debut
         frequence=1/duree
@@ -36,7 +39,7 @@ def isAt():
 """
 
 
-def stop ():
+def s ():
     move.stop()
-    cam.cv.cap.release()
-    cam.cv.destroyAllWindows()
+    cam.cap.release()
+    cv.destroyAllWindows()
