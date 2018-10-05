@@ -1,7 +1,7 @@
 import pypot.dynamixel as pd
 import time
 import math
-import keyboard as kb
+#import keyboard as kb
 from sys import exit
 
 KR = 1.339
@@ -120,8 +120,8 @@ def odometry(dxl_io):
     last_time = int(round(time.time() * 1000))
 
     while True:
-        if kb.is_pressed('s'):
-            break
+        #if kb.is_pressed('s'):
+            #break
         delta_time = (int(round(time.time() * 1000))-last_time)/float(1000)
         last_time = int(round(time.time() * 1000))
         movingSpeed1 = dxl_io.get_present_speed([1])

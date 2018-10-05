@@ -26,20 +26,22 @@ def forward(speed=10):
     dxl_io.set_moving_speed({2:-speed})
 
 def turn_right(distance, speed=10): #speed en cm/s
-    #print(distance)
-    #print(distance/float(speed))
     value = NTS*speed/PERIMETER
+
     dxl_io.set_moving_speed({1:value+speed})
     dxl_io.set_moving_speed({2:-speed})
-    #stop()
+
+    time.sleep(distance/float(speed))    
+    stop()
 
 def turn_left(distance, speed=10): #speed en cm/s
-    #print(distance)
-    #print(distance/float(speed))
     value = NTS*speed/PERIMETER
+
     dxl_io.set_moving_speed({1:speed})
     dxl_io.set_moving_speed({2:-value-speed})
-    #stop()
+
+    time.sleep(distance/float(speed))
+    stop()
 
 def backward(puissance=10):
     dxl_io.set_moving_speed({1:-puissance})
@@ -64,23 +66,21 @@ def valueToRPS(value):
 
 def backward_by(distance, speed=10): #speed en cm/s
     value = NTS*speed/PERIMETER
-    print(value)
-    print(distance/float(speed))
-    backward(value)
 
+    backward(value)
     print ("Backward_by:", distance, "cm with", speed, "cm/s")
-    #time.sleep(distance/float(speed))
-    #stop()
+
+    time.sleep(distance/float(speed))
+    stop()
 
 def forward_by(distance, speed=10): #speed en cm/s
     power = NTS*speed/PERIMETER
-    #print(power)
-    #print(distance/float(speed))
-    forward(power)
 
+    forward(power)
     print ("Forward_by:", distance, "cm with", speed, "cm/s")
-    #time.sleep(distance/float(speed))
-    #stop()
+
+    time.sleep(distance/float(speed))
+    stop()
 
 
 def turn_by (angle, speed=10):
