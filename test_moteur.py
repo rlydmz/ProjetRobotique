@@ -31,7 +31,7 @@ def turn_right(distance, speed=10): #speed en cm/s
     value = NTS*speed/PERIMETER
     dxl_io.set_moving_speed({1:value})
     dxl_io.set_moving_speed({2:0})
-    stop()
+    #stop()
 
 def turn_left(distance, speed=10): #speed en cm/s
     #print(distance)
@@ -39,7 +39,7 @@ def turn_left(distance, speed=10): #speed en cm/s
     value = NTS*speed/PERIMETER
     dxl_io.set_moving_speed({1:0})
     dxl_io.set_moving_speed({2:-value})
-    stop()
+    #stop()
 
 def backward(puissance=10):
     dxl_io.set_moving_speed({1:-puissance})
@@ -70,7 +70,7 @@ def backward_by(distance, speed=10): #speed en cm/s
 
     print ("Backward_by:", distance, "cm with", speed, "cm/s")
     #time.sleep(distance/float(speed))
-    stop()
+    #stop()
 
 def forward_by(distance, speed=10): #speed en cm/s
     power = NTS*speed/PERIMETER
@@ -80,7 +80,7 @@ def forward_by(distance, speed=10): #speed en cm/s
 
     print ("Forward_by:", distance, "cm with", speed, "cm/s")
     #time.sleep(distance/float(speed))
-    stop()
+    #stop()
 
 
 def turn_by (angle, speed=10):

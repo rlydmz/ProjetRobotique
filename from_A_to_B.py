@@ -64,9 +64,10 @@ def go_to (B, speed=10):
     angleToTurn = calculate_angle ([x1,y1], [0,0], [0,y1])
     distance = calculate_distance ([0,0], [x1,y1])
 
+    stop()
     # arrival to destination point
     turn_by (angleToTurn, speed)
-    move_by (distance, speed)
+    #move_by (distance, speed)
 
     # put the bot on the final desired angle
     # finalAngleToTurn = angle1 - angleToTurn
