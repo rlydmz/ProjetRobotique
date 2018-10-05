@@ -56,7 +56,7 @@ def virage(img):
         for y in range(-15, 15):
             if point[1] + y > 0 and point[1] + y <320:
                     img[point[0] + x, point[1] + y] = 0
-    cv.imshow('image', img)
+    #cv.imshow('image', img)
     
     return (point, angleFinal)
 
