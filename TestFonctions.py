@@ -93,16 +93,17 @@ def virage(img):
     longueur=img.shape[1]
     i=0
     
-    #point 1 on le regarde au milieu de l'image: on fixele point à largeur//2
-    xFixe=largeur//2
-    
-    bordureG=[xFixe,0]
-    bordureD=[xFixe,0]
+    #point 1 on le regarde au milieu de l'image: on fixele point Ã  largeur//2
+    #xFixe=largeur//2
+    xMobile
+    bordureG=[xMobile,0]
+    bordureD=[xMobile,0]
 
-    bordureGTrouvee=0
-    bordureDTrouvee=0
+    #bordureG=[xFixe,0]
+    #bordureD=[xFixe,0]
 
-    
+    ##Partie Fixe
+    """
     for y in range(0,longueur-1):
         if img[xFixe,y]==255:
             bordureG=[xFixe,y]
@@ -114,7 +115,23 @@ def virage(img):
                 break
         
     point=[xFixe,(bordureD[1]+bordureG[1])/2]
+    """
+    
+    ##Partie Mobile
+     while(bordureG==[xMobile,255] & bordureD==[xMobile,0]):
+         xMobile+=1
+         for y in range(0,longueur-1):
+            if img[xMobile,y]==255:
+                bordureG=[xMobile,y]
+                break
 
+        for z in range(longueur-1,bordureG[1],-1):
+            if img[xMobile,z]==255:
+                    bordureD=[xMobile,z]
+                    break
+     
+    point=[xMobile,(bordureD[1]+bordureG[1])/2]
+    ####
     angleFinal=angle(point, largeur, longueur)
 
     #visuel

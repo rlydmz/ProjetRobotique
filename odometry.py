@@ -1,110 +1,19 @@
+# coding utf-8
+
 import pypot.dynamixel as pd
 import time
 import math
 #import keyboard as kb
 from sys import exit
 
-KR = 1.339
-NTS = 60/1.339
+from test_moteur import *
 
-ROBOT_WIDTH = 15.3
-
-PERIMETER = 16.3
-RADIUS = PERIMETER/(2*math.pi)
 
 DELTA_T = 0.05 #En secondes
 
-def stop():
-    dxl_io.set_moving_speed({1:0})
-    dxl_io.set_moving_speed({2:0})
-
-def forward(puissance=10):
-    dxl_io.set_moving_speed({1:puissance})
-    dxl_io.set_moving_speed({2:-puissance})
-
-def turn_right(distance, speed=10): #speed en cm/s
-    #print(distance)
-    #print(distance/float(speed))
-    value = NTS*speed/PERIMETER
-    dxl_io.set_moving_speed({1:value})
-    dxl_io.set_moving_speed({2:0})
-    time.sleep(distance/float(speed))
-    stop()
-
-def turn_left(distance, speed=10): #speed en cm/s
-    #print(distance)
-    #print(distance/float(speed))
-    value = NTS*speed/PERIMETER
-    dxl_io.set_moving_speed({1:0})
-    dxl_io.set_moving_speed({2:-value})
-    time.sleep(distance/float(speed))
-    stop()
-
-def turn_both_wheels(leftWheelSpeed, rightWheelSpeed):
-    dxl_io.set_moving_speed({1:leftWheelSpeed})
-    dxl_io.set_moving_speed({2:-rightWheelSpeed})
-
-def backward(puissance=10):
-    dxl_io.set_moving_speed({1:-puissance})
-    dxl_io.set_moving_speed({2:puissance})
-
-def signeDe(nombre):
-    if nombre >= 0:
-        return 1
-    else:
-        return -1
-
-def degreesToRadian(angle):
-    return (angle*2*math.pi/360)
-
-def valueToNTS(value):
-    return 1.339*value/60
-
-def valueToRPS(value):
-    return valueToNTS(value)*2*math.pi
-
-#####################################################################
-
-def backward_by(distance, speed=10): #speed en cm/s
-    value = NTS*speed/PERIMETER
-    print(value)
-    print(distance/float(speed))
-    backward(value)
-    print ("Backward_by:", distance, " cm with", speed, "cm/s")
-    time.sleep(distance/float(speed))
-    stop()
-
-
-def forward_by(distance, speed=10): #speed en cm/s
-    power = NTS*speed/PERIMETER
-    #print(power)
-    #print(distance/float(speed))
-    forward(power)
-    print ("Forward_by:", distance, " cm with", speed, "cm/s")
-    time.sleep(distance/float(speed))
-    stop()
-
-
-def turn_by (angle, speed=10):
-    signe = signeDe(angle)
-
-    # Deal with angles over 360
-    if signe == 1:
-        angle %= 360
-    else:
-        angle %= -360
-
-    wheel_dist = ROBOT_WIDTH*(abs(angle)*2*math.pi/360)
-
-    print ("Turn_by:", angle, " degrees with", speed, "cm/s")
-
-    if 0 <= angle <= 180 or -360 < -angle <= -180:
-        turn_right (wheel_dist, speed)
-    else:
-        turn_left (wheel_dist, speed)
-
 
 ######################################################################
+
 
 def reset_mode(dxl_io):
     dxl_io.set_joint_mode([1])
@@ -112,6 +21,7 @@ def reset_mode(dxl_io):
     dxl_io.set_wheel_mode([1])
     dxl_io.set_wheel_mode([2])
 
+    
 def odometry(dxl_io):
     y1=0
     x1=0
@@ -120,8 +30,8 @@ def odometry(dxl_io):
     last_time = int(round(time.time() * 1000))
 
     while True:
-        if kb.is_pressed('s'):
-            break
+        #if kb.is_pressed('s'):
+            #break
         delta_time = (int(round(time.time() * 1000))-last_time)/float(1000)
         last_time = int(round(time.time() * 1000))
         movingSpeed1 = dxl_io.get_present_speed([1])
@@ -147,33 +57,20 @@ def odometry(dxl_io):
             dx=(X+ROBOT_WIDTH/float(2))*(1-math.cos(dTeta))
             y1+=dy*math.cos(teta)-math.sin(teta)*dx
             x1+=dy*math.sin(teta)+math.cos(teta)*dx
-            teta+=dTeta
+            teta-=dTeta
         else:
             y1+=math.cos(teta)*dw1
             x1+=dw1*math.sin(teta)
+
         print("X = ",x1)
         print("Y = ",y1)
         print("ANGLE = ",teta*360/(2*math.pi))
+        print ("\n")
+        print ("R =",math.sqrt (x1*x1+y1*y1))
+        print ("ANGLE POLAIRE =",math.degrees(math.atan2(y1,x1))) 
+        
         time.sleep(DELTA_T)
 
 #######################################################################
-def start():
-    ports = pd.get_available_ports()
-    if not ports:
-        exit('No port')
-    print ("Found ports", ports)
 
-    print('Connecting on the first available port:', ports[0])
-    dxl_io = pd.DxlIO(ports[0])
-
-    dxl_io.set_wheel_mode([1])
-    dxl_io.set_wheel_mode([2])
-
-    while True:
-	print(dxl_io.get_moving_speed([1])
-
-    #return dxl_io
-
-dxl_io = start()
-
-odometry(dxl_io)
+odometry (dxl_io)
