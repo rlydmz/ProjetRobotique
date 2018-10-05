@@ -4,8 +4,8 @@
 
 import time
 import TestFonctionV2 as cam
-import test_moteur as tt
 import from_A_to_B as move
+
 import cv2 as cv
 
 vitesse=10
@@ -18,7 +18,7 @@ def p():
         print("Coordonnes pointSuivant robot.py: ",coordonnes)
         pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
         #move.go_to(pointSuivant,vitesse)
-        tt.forward()
+        move.forward()
         fin=time.time()
         duree=fin-debut
         frequence=1/duree
