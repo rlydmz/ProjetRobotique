@@ -115,7 +115,7 @@ def noir():
     #if cv.waitKey(1) & 0xFF == ord('q'):
         #break
 
-    print("FONCTION NOIR() ", coordonnees)
+    print("Fonction Noir() Coordonees:", coordonnees)
     return (coordonnees, angleFinal)
 
     # When everything done, release the capture

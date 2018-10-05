@@ -14,7 +14,7 @@ def parcours():
     while(True):
         debut=time.time()
         (coordonnes,angleFinal)=cam.noir()
-        print("Coordonnes pointSuivant: "coordonnes)
+        print("Coordonnes pointSuivant robot.py: "coordonnes)
         pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
         move.go_to(pointSuivant,vitesse)
         fin=time.time()
