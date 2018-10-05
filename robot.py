@@ -20,7 +20,7 @@ def s ():
 
 
 # Parcours
-def p (couleur):
+def p (couleur,speed=20):
     if(couleur==0):
         while(True):
             try:
@@ -30,7 +30,7 @@ def p (couleur):
                 
                 pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
             
-                tt.turn_both_wheels(angleFinal)
+                tt.turn_both_wheels(angleFinal,speed)
                 
                 fin=time.time()
                 duree=fin-debut
@@ -52,7 +52,7 @@ def p (couleur):
                 
                 pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
             
-                tt.turn_both_wheels(angleFinal)
+                tt.turn_both_wheels(angleFinal,speed)
                 
                 fin=time.time()
                 duree=fin-debut
@@ -63,4 +63,4 @@ def p (couleur):
 
             except KeyboardInterrupt:
                 s()
-                sys.exit()
+                exit()
