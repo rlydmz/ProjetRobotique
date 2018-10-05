@@ -69,7 +69,7 @@ def backward_by(distance, speed=10): #speed en cm/s
     print(value)
     print(distance/float(speed))
     backward(value)
-    print ("Backward_by:", distance, " cm with", speed, "cm/s")
+    print ("Backward_by:", distance, "cm with", speed, "cm/s")
     time.sleep(distance/float(speed))
     stop()
 
@@ -78,7 +78,7 @@ def forward_by(distance, speed=10): #speed en cm/s
     #print(power)
     #print(distance/float(speed))
     forward(power)
-    print ("Forward_by:", distance, " cm with", speed, "cm/s")
+    print ("Forward_by:", distance, "cm with", speed, "cm/s")
     time.sleep(distance/float(speed))
     stop()
 
@@ -91,16 +91,16 @@ def turn_by (angle, speed=10):
         angle %= 360
     else:
         angle %= -360
-   
+
     wheel_dist = ROBOT_WIDTH*(abs(angle)*2*math.pi/360)
 
-    print ("Turn_by:", angle, " degrees with", speed, "cm/s")
+    print ("Turn_by:", angle, "degrees with", speed, "cm/s")
 
     if 0 <= angle <= 180 or -360 < angle <= -180:
         turn_right (wheel_dist, speed)
     else:
         turn_left (wheel_dist, speed)
-   
+
 
 
 
