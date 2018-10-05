@@ -48,16 +48,15 @@ def virage(img):
 
     angleFinal = angle(point, largeur, longueur)
 
-    """
+  
     # visuel
     for x in range(-15, 15):
         for y in range(-15, 15):
-            if point[1] + y > 0 & point[1] + y < 640:
-
-                img[point[0] + x, point[1] + y] = 0
+            if point[1] + y > 0 and point[1] + y < 640:
+                    img[point[0] + x, point[1] + y] = 0
 
     cv.imshow('image', img)
-    """
+    
     return (point, angleFinal)
 
 
@@ -69,7 +68,6 @@ cap = cv.VideoCapture(0)
 
 
 def noir():
-
     # Capture des frames
     ret, frame = cap.read()
 
@@ -99,7 +97,8 @@ def noir():
 
     #cv.imshow('frame_gray', img_seuil)
     # cv.imshow('erosion',erosion)
-    #cv.imshow('dilatation', dilatation)
+    cv.imshow('dilatation', dilatation)
+    cv.waitKey(10)
 
     # detection de contours verticaux
     sobelx = cv.Sobel(dilatation, cv.CV_64F, 1, 0, ksize=5)
@@ -107,18 +106,16 @@ def noir():
 
     # cv.imshow('contour',sobelx)
     # detectionCourbe(dilatation,width)
-
     (coordonnees, angleFinal) = virage(dilatation)
-
     #if cv.waitKey(1) & 0xFF == ord('q'):
         #break
 
-    print("FONCTION NOIR() ", coordonnees)
+    print("FONCTION NOIR() ", coordonnees, angleFinal)
     return (coordonnees, angleFinal)
 
     # When everything done, release the capture
-    cap.release()
-    cv.destroyAllWindows()
+    #cap.release()
+    #cv.destroyAllWindows()
 
 
 def rouge():

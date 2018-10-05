@@ -21,7 +21,7 @@ def parcours():
         duree=fin-debut
         frequence=1/duree
         #print(frequence)
-        
+   
     
     
 """
