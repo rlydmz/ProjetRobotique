@@ -44,6 +44,7 @@ def virage(img):
             bordureD = [xFixe, z]
             break
 
+    print ("bordureD", bordureD, "bordureG", bordureG)
     point = [xFixe, (bordureD[1] + bordureG[1]) / 2]
 
     angleFinal = angle(point, largeur, longueur)
@@ -99,7 +100,7 @@ def noir():
 
     #cv.imshow('frame_gray', img_seuil)
     # cv.imshow('erosion',erosion)
-    #cv.imshow('dilatation', dilatation)
+    cv.imshow('dilatation', dilatation)
 
     # detection de contours verticaux
     sobelx = cv.Sobel(dilatation, cv.CV_64F, 1, 0, ksize=5)
