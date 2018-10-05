@@ -29,7 +29,35 @@ def virage(img):
     longueur = img.shape[1]
 
     # point 1 on le regarde au milieu de l'image: on fixele point Ã  largeur//2
-    
+
+    xFixe = largeur // 2
+
+    bordureG = [xFixe, 0]
+    bordureD = [xFixe, 0]
+
+    for y in range(0, longueur - 1):
+        if img[xFixe, y] == 255:
+            bordureG = [xFixe, y]
+            break
+
+    for z in range(longueur - 1, bordureG[1], -1):
+        if img[xFixe, z] == 255:
+            bordureD = [xFixe, z]
+            break
+
+    print ("bordureD" bordureD, "bordureG" bordureG)
+
+    point = [xFixe, (bordureD[1] + bordureG[1]) / 2]
+
+    angleFinal = angle(point, largeur, longueur)
+
+
+
+
+
+
+
+    """
     xFixe = [largeur//4,largeur // 2]
     points=np.zeros((xFixe[1]-xFixe[0],2))
 
@@ -59,7 +87,7 @@ def virage(img):
 
     point=[(xFixe[1]+xFixe[0])//2,yMoy]
     print(point)
-    """
+   
 
     xMobile=50
     bordureG=[xMobile,0]
@@ -87,11 +115,11 @@ def virage(img):
     angleFinal = angle(point, largeur, longueur)
   
     # visuel
-    for x in range(-15, 15):
-        for y in range(-15, 15):
-            if point[1] + y > 0 and point[1] + y <320:
-                img[point[0] + x, point[1] + y] = 0
-    cv.imshow('image', img)
+    #for x in range(-15, 15):
+        #for y in range(-15, 15):
+            #if point[1] + y > 0 and point[1] + y <320:
+               # img[point[0] + x, point[1] + y] = 0
+   # cv.imshow('image', img)
     
     return (point, angleFinal)
 
@@ -123,7 +151,7 @@ def noir():
     # seuillage
     #ret2, frame_gray=cap.read(cv.IMREAD_GRAYSCALE)
     gray = cv.cvtColor(frame_blur, cv.COLOR_BGR2GRAY)
-    cv.imshow("gray",gray)
+   # cv.imshow("gray",gray)
     _, img_seuil = cv.threshold(gray, 100, 2555, cv.THRESH_BINARY_INV)
 
     #imgContour, contours, hierarchy = cv.findContours(img_seuil, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
@@ -174,7 +202,7 @@ def rouge():
 
     seuil=150.0
     ret,img_seuil= cv.threshold(red,seuil,255.0,cv.THRESH_BINARY)
-    cv.imshow("seg_red",img_seuil)
+    #cv.imshow("seg_red",img_seuil)
 
     #imgContour, contours, hierarchy = cv.findContours(img_seuil, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     #cv.drawContours(imgContour, contours, -1, (255,255,0), 3)
@@ -187,7 +215,7 @@ def rouge():
         
     #cv.imshow('frame_gray', img_seuil)
     # cv.imshow('erosion',erosion)
-    cv.imshow('dilatation', dilatation)
+    #cv.imshow('dilatation', dilatation)
     cv.waitKey(10)
 
     # detection de contours verticaux
