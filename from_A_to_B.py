@@ -59,7 +59,7 @@ def move_by (distance, speed):
 # Go to B =[x,y,finalAngle]] and speed in cm/s
 def go_to (B, speed=10):
     x1, y1, angle1 = B[0], B[1], B[2]
-    print ("Le point B:" B[0], B[1])
+    print ("Le point B:", B[0], B[1])
 
     angleToTurn = calculate_angle ([x1,y1], [0,0], [0,y1])
     distance = calculate_distance ([0,0], [x1,y1])

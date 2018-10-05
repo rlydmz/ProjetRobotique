@@ -5,7 +5,6 @@
 import time
 import TestFonctionV2 as cam
 import from_A_to_B as move
-from test_moteur import stop
 
 vitesse=10
 
@@ -14,12 +13,14 @@ def parcours():
     while(True):
         debut=time.time()
         (coordonnes,angleFinal)=cam.noir()
-        print("Coordonnes pointSuivant robot.py: "coordonnes)
+        print("Coordonnes pointSuivant robot.py: ",coordonnes)
         pointSuivant=[(coordonnes[1]-320)*4/480,(480-coordonnes[0])*5.5/640,angleFinal]
         move.go_to(pointSuivant,vitesse)
         fin=time.time()
         duree=fin-debut
         frequence=1/duree
+
+        print ("frequence:", frequence)
         print("\n\n")
 
 
@@ -33,3 +34,9 @@ def goTo(xA,yA,angleDegre):
 def isAt():
     #a partir du point (0,0,0), decombien le robot s'est déplacé
 """
+
+
+def stop ():
+    move.stop()
+    cam.cv.cap.release()
+    cam.cv.destroyAllWindows()
