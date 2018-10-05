@@ -67,13 +67,9 @@ def backward_by(distance, speed=10): #speed en cm/s
     print(value)
     print(distance/float(speed))
     backward(value)
-<<<<<<< HEAD
+
     print ("Backward_by:" distance "cm with" speed "cm/s")
     #time.sleep(distance/float(speed))
-=======
-    print ("Backward_by:", distance, "cm with", speed, "cm/s")
-    time.sleep(distance/float(speed))
->>>>>>> c0df8d33116c54d84a2a2e4bef23250362da7ff3
     stop()
 
 def forward_by(distance, speed=10): #speed en cm/s
@@ -81,13 +77,9 @@ def forward_by(distance, speed=10): #speed en cm/s
     #print(power)
     #print(distance/float(speed))
     forward(power)
-<<<<<<< HEAD
+
     print ("Forward_by:" distance "cm with" speed "cm/s")
     #time.sleep(distance/float(speed))
-=======
-    print ("Forward_by:", distance, "cm with", speed, "cm/s")
-    time.sleep(distance/float(speed))
->>>>>>> c0df8d33116c54d84a2a2e4bef23250362da7ff3
     stop()
 
 
