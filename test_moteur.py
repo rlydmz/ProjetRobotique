@@ -68,7 +68,7 @@ def backward_by(distance, speed=10): #speed en cm/s
     print(distance/float(speed))
     backward(value)
 
-    print ("Backward_by:" distance "cm with" speed "cm/s")
+    print ("Backward_by:", distance, "cm with", speed, "cm/s")
     #time.sleep(distance/float(speed))
     stop()
 
@@ -78,7 +78,7 @@ def forward_by(distance, speed=10): #speed en cm/s
     #print(distance/float(speed))
     forward(power)
 
-    print ("Forward_by:" distance "cm with" speed "cm/s")
+    print ("Forward_by:", distance, "cm with", speed, "cm/s")
     #time.sleep(distance/float(speed))
     stop()
 
@@ -102,7 +102,7 @@ def turn_by (angle, speed=10):
         turn_left (wheel_dist, speed)
 
 
-def continue_turn_by (angle)
+#def continue_turn_by (angle)
 
 
 ######################################################################
