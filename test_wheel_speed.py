@@ -7,7 +7,7 @@
 import pypot.dynamixel as pd
 import time
 import math
-import keyboard as kb
+#import keyboard as kb
 from sys import exit
 
 KR = 1.339
@@ -113,10 +113,10 @@ def turn_by (angle, speed=10):
 ######################################################################
 
 def odometry(dxl_io):
-    dxl_io.set_joint_mode([1])
-    dxl_io.set_joint_mode([2])
-    dxl_io.set_wheel_mode([1])
-    dxl_io.set_wheel_mode([2])
+    #dxl_io.set_joint_mode([1])
+    #dxl_io.set_joint_mode([2])
+    #dxl_io.set_wheel_mode([1])
+    #dxl_io.set_wheel_mode([2])
 
     y1=0
     x1=0
@@ -126,15 +126,17 @@ def odometry(dxl_io):
     
 
     while True:
-        if keyboard.is_pressed('s'):
-            break
+        #if keyboard.is_pressed('s'):
+            #break
         delta_time = int(round(time.time() * 1000))-last_time
         movingSpeed1 = dxl_io.get_moving_speed([1])
         movingSpeed2 = dxl_io.get_moving_speed([2])
+	print(movingSpeed1)
+	print(movingSpeed2)
         wheelSpeed1 = movingSpeed1[0]*PERIMETER/NTS
         wheelSpeed2 = movingSpeed2[0]*PERIMETER/NTS
-        dw1 = dw1 + wheelSpeed1*delta_time
-        dw2 = dw2 + wheelSpeed2*delta_time
+	dw1 = wheelSpeed1*delta_time
+        dw2 = wheelSpeed2*delta_time
         if (dw1>dw2):
             dTeta = (dw1-dw2)/ROBOT_WIDTH
             X=(ROBOT_WIDTH*dw2)/(dw1-dw2)
@@ -154,11 +156,10 @@ def odometry(dxl_io):
         else:
             y1+=dw1*math.cos(teta)+math.sin(teta)*dw1
             x1+=dw1*math.cos(teta)-math.sin(teta)*dw1
-        time.sleep(DELTA_T)
-
-    distance = 0
-    #CALCUL DE LA DISTANCE
-    return distance    
+        print(x1)
+	print(y1)
+	print(teta)
+	time.sleep(DELTA_T)
 
 #######################################################################
 def start():
@@ -173,14 +174,18 @@ def start():
     dxl_io.set_wheel_mode([1])
     dxl_io.set_wheel_mode([2])
 
-    return dxl_io
+    while True:
+	print(dxl_io.get_moving_speed([1])
+
+    #return dxl_io
 
 
-dxl_io = start()
+start()
 
-distance = odometry(dxl_io)
+while True:
+    print(dxl_io.get_moving_speed([1]))
 
-print(distance)
+#distance = odometry(dxl_io)
 
 #forward_by(24,10)
 #turn(10,10)
