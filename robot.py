@@ -19,6 +19,7 @@ def parcours():
         fin=time.time()
         duree=fin-debut
         frequence=1/duree
+        print ("frequence:", frequence)
         print("\n\n")
 
 
@@ -34,7 +35,7 @@ def isAt():
 """
 
 
-# def stop ():
-#     move.stop()
-#     cam.cv.cap.release()
-#     cam.cv.destroyAllWindows()
+def stop ():
+    move.stop()
+    cam.cv.cap.release()
+    cam.cv.destroyAllWindows()
