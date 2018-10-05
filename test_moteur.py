@@ -103,14 +103,16 @@ def turn_by (angle, speed=10):
 
 
 def turn_both_wheels(angle):
-    base_speed=15
-    factor = abs(angle)/180
+    base_speed=20
+    factor = 3 * abs(angle)/180
+
+    print ("Turn by", angle, "et facteur", factor)
     if angle >= 0 and angle <= 180:
         dxl_io.set_moving_speed({1:base_speed+(factor*base_speed*2)})
         dxl_io.set_moving_speed({2:-base_speed})
     elif angle < 0 and angle > -180:
         dxl_io.set_moving_speed({1:base_speed})
-        dxl_io.set_moving_speed({2:-base_speed+(factor*base_speed*2)})
+        dxl_io.set_moving_speed({2:-base_speed-(factor*base_speed*2)})
 
 
 #def continue_turn_by (angle)
