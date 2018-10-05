@@ -65,18 +65,12 @@ def odometry(dxl_io):
         print("X = ",x1)
         print("Y = ",y1)
         print("ANGLE = ",teta*360/(2*math.pi))
-<<<<<<< HEAD
-        print("R = "math.sqrt(x1*x1+y1*y1))
-        print("TETA POLAIRE = ",math.atan2(y1,x1))
-
-=======
         print ("\n")
         print ("R =",math.sqrt (x1*x1+y1*y1))
         print ("ANGLE POLAIRE =",math.degrees(math.atan2(y1,x1))) 
         
->>>>>>> 21232aad52f25d27cf3f9ba22b1e107b071c2d08
         time.sleep(DELTA_T)
 
 #######################################################################
-
+#reset_mode (dxl_io)
 odometry (dxl_io)
