@@ -25,20 +25,16 @@ def forward(speed=10):
 
 def turn_right(distance, speed=10): #speed en cm/s
     value = NTS*speed/PERIMETER
-
     dxl_io.set_moving_speed({1:value+speed})
-    dxl_io.set_moving_speed({2:-speed})
-
+    dxl_io.set_moving_speed({2:value+speed})
     time.sleep(distance/float(speed))    
     stop()
 
 def turn_left(distance, speed=10): #speed en cm/s
     value = NTS*speed/PERIMETER
-
-    dxl_io.set_moving_speed({1:speed})
+    dxl_io.set_moving_speed({1:-value-speed})
     dxl_io.set_moving_speed({2:-value-speed})
-
-    time.sleep(distance/float(speed))
+    time.sleep(distance/float(speed))    
     stop()
 
 def backward(puissance=10):
@@ -85,20 +81,21 @@ def forward_by(distance, speed=10): #speed en cm/s
 def turn_by (angle, speed=10):
     signe = signeDe(angle)
 
+
     # Handle angles over 360
     if signe == 1:
         angle %= 360
     else:
         angle %= -360
 
-    wheel_dist = ROBOT_WIDTH*(abs(angle)*2*math.pi/360)
+    wheel_dist = ROBOT_WIDTH*(abs(angle/2)*2*math.pi/360)
 
     print ("Turn_by:", angle, "degrees with", speed, "cm/s")
 
     if 0 <= angle <= 180 or -360 < angle <= -180:
-        turn_right (wheel_dist, speed)
+        turn_right(wheel_dist,speed)
     else:
-        turn_left (wheel_dist, speed)
+        turn_left(wheel_dist,speed)
 
 
 def turn_both_wheels (angle):
